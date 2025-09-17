@@ -40,8 +40,23 @@ class Perceptron:
 
         """
         self.w_ = np.zeros(1 + X.shape[1])  # First position corresponds to threshold
+        
+        w_j = self.w_[1:] #All weights less the bias
+        bias = self.w_[0] #BIAS
 
-        # TODO: Put your code (fit algorithm)
+
+        for _ in range(self.n_iter):
+            y_pred = self.predict(X)
+            error = y - y_pred   # vector de errores
+
+            # actualización global (suma de todas las correcciones)
+            w_j =w_j + self.eta * np.dot(error, X) #W_j
+            bias = bias + self.eta * np.sum(error) #Bias
+            self.w_ = np.concatenate(([bias], w_j)) #Concatenar
+
+    
+
+            
 
 
     def predict(self, X):
@@ -51,6 +66,16 @@ class Perceptron:
             Return a list with classes
         """
 
-        # TODO: Put your code
+        w_i = self.w_[1:] #All weight less the bias
+        bias = self.w_[0]
 
-        return np.random.randint(0, 2, size=X.shape[0])  # remove
+        #Calculate output
+        z = np.dot(X, w_i) + bias 
+
+        #Prediction
+        y_pred = [self.escalon(valor) for valor in z]
+
+        return y_pred  
+    
+    def escalon(self, x):
+        return 1 if x >= 0 else -1

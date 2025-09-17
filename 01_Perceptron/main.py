@@ -15,7 +15,20 @@ perceptron = Perceptron()
 perceptron.fit(X, y)  # Ajusta els pesos
 y_prediction = perceptron.predict(X)  # Prediu
 
+
 #  Resultats
+bias = perceptron.w_[0]
+w1, w2 = perceptron.w_[1:]
+
+m = -w1 / w2
+c = -bias / w2
+
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+x_vals = np.linspace(x_min, x_max, 100)
+y_vals = m * x_vals + c
+
 plt.figure(1)
-plt.scatter(X[:, 0], X[:, 1], c=y_prediction)  # Mostram el conjunt de mostres el color indica la classe
-plt.show()
+plt.scatter(X[:, 0], X[:, 1], c=y_prediction, cmap="bwr", alpha=0.7)
+plt.plot(x_vals, y_vals, 'k--', label="Límite de decisión")
+plt.legend()
+plt.savefig("resultado.png")  # Guarda el gráfico
