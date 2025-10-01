@@ -24,6 +24,7 @@ plt.scatter(X[:, 0], X[:, 1], c=y)
 m = -perceptron.w_[1] / perceptron.w_[2]
 origen = (0, -perceptron.w_[0] / perceptron.w_[2])
 plt.axline(xy1=origen, slope=m)
+plt.savefig("hola.png")
 
 
 # Extra: Dibuixam el nombre d'errors en cada iteracio de l'algorisme
@@ -32,5 +33,4 @@ plt.figure(2)
 plt.plot(perceptron.errors_, marker='o')
 plt.xlabel('Epochs')
 plt.ylabel('Number of miss classifications')
-plt.show()
-
+plt.savefig("resultado_sol.png")

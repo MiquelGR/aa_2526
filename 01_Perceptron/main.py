@@ -32,3 +32,4 @@ plt.scatter(X[:, 0], X[:, 1], c=y_prediction, cmap="bwr", alpha=0.7)
 plt.plot(x_vals, y_vals, 'k--', label="Límite de decisión")
 plt.legend()
 plt.savefig("resultado.png")  # Guarda el gráfico
+
